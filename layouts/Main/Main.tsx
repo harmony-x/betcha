@@ -20,6 +20,30 @@ import {
 } from "./Main.styles";
 import { MainProps } from "./Main.types";
 
+// @jibola: just to setup, not the real component
+const ConnectWallet = () => {
+  const injectedConnector = new InjectedConnector({
+    // supportedChainIds: [80001],
+  });
+  const { chainId, account, activate, active, library } =
+    useWeb3React<Web3Provider>();
+  useEffect(() => {
+    if (active && chainId !== 80001) {
+      // shows everytime
+      console.log("Only polygon testnet is supported.");
+    }
+  }, [active, chainId]);
+  const onClick = () => {
+    // where the connection happens
+    activate(injectedConnector);
+  };
+  return (
+    <div style={{ cursor: "pointer" }} onClick={onClick}>
+      connect wallet
+    </div>
+  );
+};
+
 const Main: React.FC<MainProps> = ({
   children,
   buttonIcon,
@@ -27,7 +51,21 @@ const Main: React.FC<MainProps> = ({
   onHistoryClick,
 }) => {
   const router = useRouter();
-  const [isPlaying, setIsPlaying] = React.useState<boolean>(false);
+
+  const { isPlaying, setIsPlaying } = useGlobalState();
+
+  const [balance, setBalance] = React.useState<number | string>("-");
+
+  const { chainId, account, activate, active, library } =
+    useWeb3React<Web3Provider>();
+
+  useEffect(() => {
+    account &&
+      library?.getBalance(account).then((result) => {
+        setBalance((Number(result._hex) / 1e18).toFixed(3));
+      });
+  }, [library, account]);
+
   return (
     <StyledMain>
       <StyledMainTop>
@@ -38,8 +76,12 @@ const Main: React.FC<MainProps> = ({
             </MainButton>
           </Flex>
           <Flex gap="25px" width="max-content" align="center">
-            <Paragraph>5 SOL</Paragraph>
-            <UserProfile address="ox45677cffvf" />
+            <Paragraph> {balance} MATIC </Paragraph>
+            {/* Apply in proper place */}
+            <ConnectWallet />
+            <UserProfile
+              address={account ? truncateAddress(account) : "Connect Wallet"}
+            />
           </Flex>
         </Flex>
       </StyledMainTop>

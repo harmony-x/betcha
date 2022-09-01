@@ -13,7 +13,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
  * @dev Basically ERC20 Token
  */
 contract BetchaCoin is ERC20, ERC20Permit, ERC20Votes, Ownable{
-    constructor() ERC20("Betcha", "TESTBCHA") ERC20Permit("Betcha") {}
+    constructor() ERC20("Betcha", "BCHA") ERC20Permit("Betcha") {}
     function _afterTokenTransfer(address from, address to, uint256 amount)
         internal
         override(ERC20, ERC20Votes)

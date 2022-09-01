@@ -9,7 +9,6 @@ import { useGlobalState } from "context/context";
 import { truncateAddress } from "$utils/utils";
 import { Web3Provider } from "@ethersproject/providers";
 import { useWeb3React } from "@web3-react/core";
-import { InjectedConnector } from "@web3-react/injected-connector";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import {
@@ -19,30 +18,6 @@ import {
   StyledMainTop,
 } from "./Main.styles";
 import { MainProps } from "./Main.types";
-
-// @jibola: just to setup, not the real component
-const ConnectWallet = () => {
-  const injectedConnector = new InjectedConnector({
-    // supportedChainIds: [80001],
-  });
-  const { chainId, account, activate, active, library } =
-    useWeb3React<Web3Provider>();
-  useEffect(() => {
-    if (active && chainId !== 80001) {
-      // shows everytime
-      console.log("Only polygon testnet is supported.");
-    }
-  }, [active, chainId]);
-  const onClick = () => {
-    // where the connection happens
-    activate(injectedConnector);
-  };
-  return (
-    <div style={{ cursor: "pointer" }} onClick={onClick}>
-      connect wallet
-    </div>
-  );
-};
 
 const Main: React.FC<MainProps> = ({
   children,
@@ -77,8 +52,6 @@ const Main: React.FC<MainProps> = ({
           </Flex>
           <Flex gap="25px" width="max-content" align="center">
             <Paragraph> {balance} MATIC </Paragraph>
-            {/* Apply in proper place */}
-            <ConnectWallet />
             <UserProfile
               address={account ? truncateAddress(account) : "Connect Wallet"}
             />

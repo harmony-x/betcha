@@ -2,10 +2,13 @@ import Main from "$layouts/Main/Main";
 import ChooseGame from "$screens/ChooseGame/ChooseGame";
 import ConnectWallet from "$screens/ConnectWallet/ConnectWallet";
 import HomeIcon from "$svgs/HomeIcon";
+import { Web3Provider } from "@ethersproject/providers";
+import { useWeb3React } from "@web3-react/core";
 import type { NextPage } from "next";
 import Head from "next/head";
 
 const HomePage: NextPage = () => {
+  const { active } = useWeb3React<Web3Provider>();
   return (
     <div>
       <Head>
@@ -16,10 +19,13 @@ const HomePage: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* <ConnectWallet /> */}
-      <Main buttonIcon={<HomeIcon />}>
-        <ChooseGame />
-      </Main>
+      {!active ? (
+        <ConnectWallet />
+      ) : (
+        <Main buttonIcon={<HomeIcon />}>
+          <ChooseGame />
+        </Main>
+      )}
     </div>
   );
 };

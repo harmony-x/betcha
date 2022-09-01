@@ -4,6 +4,7 @@ import UserProfile from "$components/UserProfile/UserProfile";
 import InfoIcon from "$svgs/InfoIcon";
 import MusicIcon from "$svgs/MusicIcon";
 import { useRouter } from "next/router";
+import React from "react";
 import {
   MainButton,
   StyledMain,
@@ -14,8 +15,18 @@ import { MainProps } from "./Main.types";
 
 const Main: React.FC<MainProps> = ({ children, buttonIcon }) => {
   const router = useRouter();
+  const [isPlaying, setIsPlaying] = React.useState<boolean>(false);
+  const audioRef = React.useRef<HTMLAudioElement | null>(null);
   return (
     <StyledMain>
+      <audio
+        ref={audioRef}
+        src={
+          "https://res.cloudinary.com/dexg5uy3d/video/upload/v1661996886/WhatsApp_Audio_2022-09-01_at_2.39.58_AM_erpdn8.mp3"
+        }
+        title={"Game sound"}
+        loop
+      ></audio>
       <StyledMainTop>
         <Flex align="center" justify="space-between">
           <Flex width="max-content" align="center" gap="14px">
@@ -36,7 +47,17 @@ const Main: React.FC<MainProps> = ({ children, buttonIcon }) => {
             <MainButton>
               <InfoIcon />
             </MainButton>
-            <MainButton>
+            <MainButton
+              onClick={() => {
+                if (isPlaying) {
+                  audioRef?.current?.pause();
+                  setIsPlaying(!isPlaying);
+                } else {
+                  audioRef?.current?.play();
+                  setIsPlaying(!isPlaying);
+                }
+              }}
+            >
               <MusicIcon />
             </MainButton>
           </Flex>

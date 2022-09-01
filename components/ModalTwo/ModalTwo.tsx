@@ -17,6 +17,7 @@ const ModalTwo: React.FC<ModalTwoProps> = ({
   isOpen,
   setIsOpen,
   contentBackGroundColor,
+  contentMaxHeight,
   headingBackGroundColor,
   headingColor,
   headingHeight,
@@ -44,7 +45,9 @@ const ModalTwo: React.FC<ModalTwoProps> = ({
                 {text}
               </HeadingFour>
             </StyledModalHeadingWrapper>
-            <StyledModalContent>{children}</StyledModalContent>
+            <StyledModalContent maxHeight={contentMaxHeight}>
+              {children}
+            </StyledModalContent>
           </StyledModalBoxTwo>
         </StyledModalBoxOne>
       </StyledModalBody>

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {
   StyledModalBoxTwoProps,
+  StyledModalContentProps,
   StyledModalHeadingWrapperProps,
   StyledModalWrapperProps,
 } from "./ModalTwo.types";
@@ -60,9 +61,9 @@ export const StyledModalBoxTwo = styled.div<StyledModalBoxTwoProps>`
   height: 488px;
 `;
 
-export const StyledModalContent = styled.div`
+export const StyledModalContent = styled.div<StyledModalContentProps>`
   width: 100%;
-  max-height: 284px;
+  max-height: ${({ maxHeight }) => maxHeight};
   overflow-y: auto;
 `;
 
@@ -70,8 +71,7 @@ export const StyledModalHeadingWrapper = styled.div<StyledModalHeadingWrapperPro
   width: 780px;
   height: ${({ height }) => height ?? "125px"};
   background-color: ${({ backgroundColor, theme }) =>
-    backgroundColor ?? theme.colors.primary5};
-  background-color: #f1be59;
+    backgroundColor ?? theme.colors.primary7};
   border-radius: 44px 44px 0px 0px;
   display: flex;
   align-items: center;

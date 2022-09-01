@@ -9,6 +9,10 @@ export interface StyledModalBoxTwoProps {
   backgroundColor?: CSSTypes.Property.BackgroundColor;
 }
 
+export interface StyledModalContentProps {
+  maxHeight?: CSSTypes.Property.MaxHeight;
+}
+
 export type ModalTwoProps = {
   children: React.ReactNode;
   isOpen: boolean;
@@ -17,6 +21,7 @@ export type ModalTwoProps = {
   headingColor?: CSSTypes.Property.Color;
   contentBackGroundColor?: CSSTypes.Property.BackgroundColor;
   headingHeight?: CSSTypes.Property.Height;
+  contentMaxHeight?: CSSTypes.Property.MaxHeight;
   text: string;
 };
 

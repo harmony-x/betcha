@@ -3,6 +3,7 @@ import { Paragraph } from "$components/Typography/Typography.styles";
 import UserProfile from "$components/UserProfile/UserProfile";
 import InfoIcon from "$svgs/InfoIcon";
 import MusicIcon from "$svgs/MusicIcon";
+import MusicOffIcon from "$svgs/MusicOffIcon";
 import { useRouter } from "next/router";
 import React from "react";
 import {
@@ -13,7 +14,7 @@ import {
 } from "./Main.styles";
 import { MainProps } from "./Main.types";
 
-const Main: React.FC<MainProps> = ({ children, buttonIcon }) => {
+const Main: React.FC<MainProps> = ({ children, buttonIcon, onInfoClick }) => {
   const router = useRouter();
   const [isPlaying, setIsPlaying] = React.useState<boolean>(false);
   const audioRef = React.useRef<HTMLAudioElement | null>(null);
@@ -44,7 +45,7 @@ const Main: React.FC<MainProps> = ({ children, buttonIcon }) => {
       <StyledMainBottom>
         <Flex align="center" justify="space-between">
           <Flex width="max-content" align="center" gap="14px">
-            <MainButton>
+            <MainButton onClick={onInfoClick}>
               <InfoIcon />
             </MainButton>
             <MainButton
@@ -58,7 +59,7 @@ const Main: React.FC<MainProps> = ({ children, buttonIcon }) => {
                 }
               }}
             >
-              <MusicIcon />
+              {isPlaying ? <MusicIcon /> : <MusicOffIcon />}
             </MainButton>
           </Flex>
         </Flex>

@@ -62,9 +62,11 @@ const Main: React.FC<MainProps> = ({
       <StyledMainBottom>
         <Flex align="center" justify="space-between">
           <Flex width="max-content" align="center" gap="14px">
-            <MainButton onClick={onInfoClick}>
-              <InfoIcon />
-            </MainButton>
+            {onInfoClick ? (
+              <MainButton onClick={onInfoClick}>
+                <InfoIcon />
+              </MainButton>
+            ) : null}
             <MainButton
               onClick={() => {
                 if (isPlaying) {
@@ -83,9 +85,11 @@ const Main: React.FC<MainProps> = ({
               {isPlaying ? <MusicIcon /> : <MusicOffIcon />}
             </MainButton>
           </Flex>
-          <MainButton onClick={onHistoryClick}>
-            <HistoryIcon />
-          </MainButton>
+          {onHistoryClick ? (
+            <MainButton onClick={onHistoryClick}>
+              <HistoryIcon />
+            </MainButton>
+          ) : null}
         </Flex>
       </StyledMainBottom>
     </StyledMain>

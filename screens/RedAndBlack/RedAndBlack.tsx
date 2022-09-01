@@ -10,6 +10,8 @@ import {
 } from "$components/Typography/Typography.styles";
 import BlackBtnBg from "$svgs/BlackBtnBg";
 import CancelBtnBg from "$svgs/CancelBtnBg";
+import ClaimBtnBg from "$svgs/ClaimBtnBg";
+import ClaimedBtnBg from "$svgs/ClaimedBtnBg";
 import ConfirmBtnBg from "$svgs/ConfirmBtnBg";
 import PlayAgainBtnBg from "$svgs/PlayAgainBtnBg";
 import RedBtnBg from "$svgs/RedBtnBg";
@@ -24,6 +26,7 @@ const RedAndBlack = () => {
   const theme = useTheme() as any;
   const [range, setRange] = React.useState<number>(0);
   const [isOpenModal, setIsOpenModal] = React.useState<boolean>(false);
+  const [disableClaim, setDisableClaim] = React.useState<boolean>(false);
   const [choice, setChoice] = React.useState<Choice>("");
   const [game, setGame] = React.useState<Game>({
     status: "init",
@@ -133,24 +136,41 @@ const RedAndBlack = () => {
                   />
                 </>
               ) : (
-                <Button
-                  onClick={() => {
-                    setGame({
-                      status: "init",
-                      correctChoice: "",
-                      amount: range * 2,
-                    });
-                    setRange(0);
-                  }}
-                  icon={<PlayAgainBtnBg />}
-                  text={
-                    <Span size="2.4rem" lineHeight="31px">
-                      PLAY AGAIN
-                    </Span>
-                  }
-                  height="66px"
-                  width="278.79px"
-                />
+                <>
+                  <Button
+                    onClick={() => {
+                      setGame({
+                        status: "init",
+                        correctChoice: "",
+                        amount: range * 2,
+                      });
+                      setRange(0);
+                      setDisableClaim(false);
+                    }}
+                    icon={<PlayAgainBtnBg />}
+                    text={
+                      <Span size="2.4rem" lineHeight="31px">
+                        PLAY AGAIN
+                      </Span>
+                    }
+                    height="66px"
+                    width="200px"
+                  />
+                  <Button
+                    disabled={disableClaim}
+                    onClick={() => {
+                      setDisableClaim(true);
+                    }}
+                    icon={disableClaim ? <ClaimedBtnBg /> : <ClaimBtnBg />}
+                    text={
+                      <Span size="2.4rem" lineHeight="31px">
+                        {disableClaim ? "CLAIMED" : "CLAIM"}
+                      </Span>
+                    }
+                    height="66px"
+                    width="200px"
+                  />
+                </>
               )}
             </Flex>
           </Flex>

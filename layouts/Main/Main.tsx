@@ -22,7 +22,7 @@ const Main: React.FC<MainProps> = ({ children, buttonIcon }) => {
       <audio
         ref={audioRef}
         src={
-          "https://res.cloudinary.com/dexg5uy3d/video/upload/v1661996886/WhatsApp_Audio_2022-09-01_at_2.39.58_AM_erpdn8.mp3"
+          "https://res.cloudinary.com/dexg5uy3d/video/upload/v1661998204/16_Menu_q1acbq.mp3"
         }
         title={"Game sound"}
         loop

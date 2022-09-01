@@ -14,8 +14,12 @@ import ConfirmBtnBg from "$svgs/ConfirmBtnBg";
 import PlayAgainBtnBg from "$svgs/PlayAgainBtnBg";
 import RedBtnBg from "$svgs/RedBtnBg";
 import Trophy from "$svgs/Trophy";
+import { betchaContract } from "$utils/contracts";
 import { chipToMatic } from "$utils/utils";
-import React from "react";
+import { Web3Provider } from "@ethersproject/providers";
+import { useWeb3React } from "@web3-react/core";
+import { ethers } from "ethers";
+import React, { useEffect } from "react";
 import { useTheme } from "styled-components";
 import { RedAndBlackLeftPane, RedAndBlackWrapper } from "./RedAndBlack.styles";
 import { Choice, Game } from "./RedAndBlack.types";
@@ -25,6 +29,7 @@ const RedAndBlack = () => {
   const [range, setRange] = React.useState<number>(0);
   const [isOpenModal, setIsOpenModal] = React.useState<boolean>(false);
   const [choice, setChoice] = React.useState<Choice>("");
+  const choiceOption = { red: 0, black: 1, "": 2 };
   const [game, setGame] = React.useState<Game>({
     status: "init",
     correctChoice: "",
@@ -32,6 +37,16 @@ const RedAndBlack = () => {
   });
 
   const { status, correctChoice, amount } = game;
+  const { library, account } = useWeb3React<Web3Provider>();
+
+  useEffect(() => {
+    betchaContract(library).on(
+      betchaContract(library).filters.BetPlaced(),
+      (ss) => {
+        console.log("ss", ss);
+      }
+    );
+  }, []);
 
   return (
     <RedAndBlackWrapper>
@@ -88,7 +103,7 @@ const RedAndBlack = () => {
                 </Span>
                 <Trophy />
                 <Span size="3rem" lineHeight="48px">
-                  {amount} BCHA
+                  {(amount * 0.05).toFixed(2)} MATIC
                 </Span>
               </Flex>
             ) : choice !== "" && correctChoice !== choice ? (
@@ -199,7 +214,15 @@ const RedAndBlack = () => {
               width="200px"
             />
             <Button
-              onClick={() => {
+              onClick={async () => {
+                setGame({
+                  ...game,
+                  status: "processing",
+                });
+                  await betchaContract(library).placeBet(choiceOption[choice], {
+                    value: ethers.utils.parseEther("" + range * 0.05 * 1.001),
+                    gasLimit: 22000,
+                  })
                 setGame({
                   status: "complete",
                   amount: range * 2,

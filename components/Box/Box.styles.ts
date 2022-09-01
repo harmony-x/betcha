@@ -20,9 +20,9 @@ export const Flex = styled.div<FlexProps>`
   padding: ${({ padding }) => (padding ? padding : "initial")};
   border: ${({ border }) => (border ? border : "none")};
   justify-items: ${({ justifyItems }) => justifyItems || "normal"};
-  & > * {
+  /* & > * {
     min-width: 0;
-  }
+  } */
 `;
 
 export const Grid = styled.div<GridProps>`

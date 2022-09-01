@@ -171,7 +171,7 @@ const RedAndBlack = () => {
             size="5.4rem"
             lineHeight="60px"
           >
-            PLACE BET OF <br /> {range} CHIP ({chipToMatic(range)}) for
+            PLACE BET OF <br /> {range} CHIP <br /> ({chipToMatic(range)}) for
             <Span
               margin="0 0 0 10px"
               size="5.4rem"

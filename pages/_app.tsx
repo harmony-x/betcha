@@ -5,6 +5,7 @@ import GlobalStyle from "styles/globals";
 import { colors } from "theme/colors";
 import { Web3ReactProvider } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
+import Preloader from "$components/Preloader/Preloader";
 
 function getLibrary(provider: any): Web3Provider {
   const library = new Web3Provider(provider);
@@ -25,6 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           loop
         ></audio>
         <GlobalStyle />
+        <Preloader />
         <ContextProvider>
           <Component {...pageProps} />
         </ContextProvider>

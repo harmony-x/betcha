@@ -10,16 +10,20 @@ const GlobalStyle = createGlobalStyle`
     font-size: 62.5%;
   }
   body {
-  padding: 0;
-  margin: 0;
-  font-family: 'SUPER BOOM', sans-serif; 
-   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  width: 100%;
-  height: 100vh;
-  background-image: url("/Game Background.png");
-  background-position: center;
-  background-size: cover;
+    padding: 0;
+    margin: 0;
+    font-family: 'SUPER BOOM', sans-serif; 
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    width: 100%;
+    height: 100vh;
+    background-image: url("/Game Background.png");
+    background-position: center;
+    background-size: cover;
+    width: 1440px;
+    @media screen and (min-width: 1280px) {
+      width: 100%;
+    }
 	}
 	*,
 	*::before,

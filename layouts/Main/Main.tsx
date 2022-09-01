@@ -28,7 +28,6 @@ const Main: React.FC<MainProps> = ({
 }) => {
   const router = useRouter();
   const [isPlaying, setIsPlaying] = React.useState<boolean>(false);
-  const audioRef = React.useRef<HTMLAudioElement | null>(null);
   return (
     <StyledMain>
       <StyledMainTop>

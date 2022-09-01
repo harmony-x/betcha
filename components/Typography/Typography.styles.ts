@@ -42,6 +42,7 @@ export const Paragraph = styled.p<TypographyProps>`
   font-weight: ${({ weight }) => (weight ? weight : "400")};
   -webkit-text-stroke: ${({ theme, isTextStroke }) =>
     isTextStroke ? `1px ${theme.colors.primary2}` : ""};
+  margin: ${({ margin }) => margin};
   font-family: "SUPER BOOM", sans-serif;
 `;
 

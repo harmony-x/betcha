@@ -33,6 +33,7 @@ export const ChoiceCardBoxThree = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
+  gap: 15px;
   padding: 28px 0;
 `;
 

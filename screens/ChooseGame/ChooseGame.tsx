@@ -10,12 +10,13 @@ const ChooseGame = () => {
   return (
     <ChooseGameWrapper>
       <Flex flexDir="column" align="center" justify="center">
-        <HeadingOne>SELECT GAME</HeadingOne>
+        <HeadingOne isTextStroke>SELECT GAME</HeadingOne>
         <Flex gap="24px" width="max-content" margin="50px 0 0 0">
           {[
             {
               title: "RED & BLACK",
               id: 0,
+              link: "/red-black",
             },
             {
               title: "POKER GAME",
@@ -25,8 +26,8 @@ const ChooseGame = () => {
               title: "CASINO ROYALE",
               id: 2,
             },
-          ].map(({ id, title }) => (
-            <ChoiceCard key={id} title={title} />
+          ].map(({ id, title, link }) => (
+            <ChoiceCard key={id} title={title} link={link} />
           ))}
         </Flex>
       </Flex>

@@ -15,7 +15,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ address }) => {
         <StyledProfileBoxThree>
           <StyledEllipse />
           <StyledAvartar />
-          <Span size="2.4rem" lineHeight="31px">
+          <Span isTextStroke size="2.4rem" lineHeight="31px">
             {address}
           </Span>
         </StyledProfileBoxThree>

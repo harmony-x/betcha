@@ -1,5 +1,5 @@
 import CSSTypes from "csstype";
-import React, { HTMLAttributes } from "react";
+import React from "react";
 
 export interface StyledStyledButtonOneProps {
   width?: CSSTypes.Property.Width;
@@ -7,7 +7,7 @@ export interface StyledStyledButtonOneProps {
 }
 
 export type ButtonProps = StyledStyledButtonOneProps &
-  HTMLAttributes<HTMLButtonElement> & {
+  React.ButtonHTMLAttributes<HTMLButtonElement> & {
     text: React.ReactNode;
     icon: JSX.Element;
   };

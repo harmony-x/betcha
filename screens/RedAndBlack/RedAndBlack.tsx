@@ -10,6 +10,8 @@ import {
 } from "$components/Typography/Typography.styles";
 import BlackBtnBg from "$svgs/BlackBtnBg";
 import CancelBtnBg from "$svgs/CancelBtnBg";
+import ClaimBtnBg from "$svgs/ClaimBtnBg";
+import ClaimedBtnBg from "$svgs/ClaimedBtnBg";
 import ConfirmBtnBg from "$svgs/ConfirmBtnBg";
 import PlayAgainBtnBg from "$svgs/PlayAgainBtnBg";
 import RedBtnBg from "$svgs/RedBtnBg";
@@ -28,6 +30,7 @@ const RedAndBlack = () => {
   const theme = useTheme() as any;
   const [range, setRange] = React.useState<number>(0);
   const [isOpenModal, setIsOpenModal] = React.useState<boolean>(false);
+  const [disableClaim, setDisableClaim] = React.useState<boolean>(false);
   const [choice, setChoice] = React.useState<Choice>("");
   const choiceOption = { red: 0, black: 1, "": 2 };
   const [game, setGame] = React.useState<Game>({
@@ -119,6 +122,8 @@ const RedAndBlack = () => {
                       if (!!range) {
                         setChoice("red");
                         setIsOpenModal(true);
+                      } else {
+                        alert("Choose at least 1 chip to play");
                       }
                     }}
                     icon={<RedBtnBg />}
@@ -135,6 +140,8 @@ const RedAndBlack = () => {
                       if (!!range) {
                         setChoice("black");
                         setIsOpenModal(true);
+                      } else {
+                        alert("Choose at least 1 chip to play");
                       }
                     }}
                     icon={<BlackBtnBg />}
@@ -148,24 +155,41 @@ const RedAndBlack = () => {
                   />
                 </>
               ) : (
-                <Button
-                  onClick={() => {
-                    setGame({
-                      status: "init",
-                      correctChoice: "",
-                      amount: range * 2,
-                    });
-                    setRange(0);
-                  }}
-                  icon={<PlayAgainBtnBg />}
-                  text={
-                    <Span size="2.4rem" lineHeight="31px">
-                      PLAY AGAIN
-                    </Span>
-                  }
-                  height="66px"
-                  width="278.79px"
-                />
+                <>
+                  <Button
+                    onClick={() => {
+                      setGame({
+                        status: "init",
+                        correctChoice: "",
+                        amount: range * 2,
+                      });
+                      setRange(0);
+                      setDisableClaim(false);
+                    }}
+                    icon={<PlayAgainBtnBg />}
+                    text={
+                      <Span size="2.4rem" lineHeight="31px">
+                        PLAY AGAIN
+                      </Span>
+                    }
+                    height="66px"
+                    width="200px"
+                  />
+                  <Button
+                    disabled={disableClaim}
+                    onClick={() => {
+                      setDisableClaim(true);
+                    }}
+                    icon={disableClaim ? <ClaimedBtnBg /> : <ClaimBtnBg />}
+                    text={
+                      <Span size="2.4rem" lineHeight="31px">
+                        {disableClaim ? "CLAIMED" : "CLAIM"}
+                      </Span>
+                    }
+                    height="66px"
+                    width="200px"
+                  />
+                </>
               )}
             </Flex>
           </Flex>

@@ -3,14 +3,21 @@ import { StyledBetHeading } from "./BetHeading.styles";
 import { BetHeadingProps } from "./BetHeading.types";
 
 const BetHeading: React.FC<BetHeadingProps> = ({
-  betAmount,
+  text,
   height,
   width,
+  backgroundColor,
+  color,
 }) => {
   return (
-    <StyledBetHeading width={width} height={height}>
+    <StyledBetHeading
+      width={width}
+      height={height}
+      backgroundColor={backgroundColor}
+      color={color}
+    >
       <Span lineHeight="36px" size="2.8rem">
-        BET {betAmount} BCHA
+        {text}
       </Span>
     </StyledBetHeading>
   );

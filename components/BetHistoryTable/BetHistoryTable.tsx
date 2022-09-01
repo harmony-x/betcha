@@ -53,13 +53,13 @@ const BetHistoryTable: React.FC = () => {
       ].map(({ id, amount, choice, orderID, won }, index) => (
         <StyledBetHistoryTableRow
           backgroundColor={
-            (index + 1) % 2 ? theme.colors.primary7 : theme.colors.primary6
+            (index + 1) % 2 ? theme.colors.primary6 : theme.colors.primary7
           }
           key={id}
         >
           <StyledBetHistoryTableDataOne>
             <Span
-              color={(index + 1) % 2 ? theme.colors.white : theme.colors.black2}
+              color={(index + 1) % 2 ? theme.colors.black2 : theme.colors.white}
               transform="uppercase"
               size="2.6rem"
               align="center"
@@ -72,14 +72,14 @@ const BetHistoryTable: React.FC = () => {
             <Flex gap="13.11px">
               <StyledTicketIcon
                 fill={
-                  (index + 1) % 2 ? theme.colors.white : theme.colors.black2
+                  (index + 1) % 2 ? theme.colors.black2 : theme.colors.white
                 }
               />
             </Flex>
           </StyledBetHistoryTableDataTwo>
           <StyledBetHistoryTableDataThree>
             <Span
-              color={(index + 1) % 2 ? theme.colors.white : theme.colors.black2}
+              color={(index + 1) % 2 ? theme.colors.black2 : theme.colors.white}
               transform="uppercase"
               size="2.6rem"
               align="center"

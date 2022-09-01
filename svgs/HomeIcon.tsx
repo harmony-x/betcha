@@ -50,7 +50,7 @@ export default function HomeIcon(props: SVGProps<SVGSVGElement>): JSX.Element {
       </g>
       <mask
         id="mask0_150_366"
-        mask="mask-type:alpha"
+        style={{ mask: "mask-type:alpha" }}
         maskUnits="userSpaceOnUse"
         x="21"
         y="19"

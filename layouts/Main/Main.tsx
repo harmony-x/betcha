@@ -5,6 +5,7 @@ import HistoryIcon from "$svgs/HistoryIcon";
 import InfoIcon from "$svgs/InfoIcon";
 import MusicIcon from "$svgs/MusicIcon";
 import MusicOffIcon from "$svgs/MusicOffIcon";
+import { useGlobalState } from "context/context";
 import { useRouter } from "next/router";
 import React from "react";
 import {
@@ -22,18 +23,9 @@ const Main: React.FC<MainProps> = ({
   onHistoryClick,
 }) => {
   const router = useRouter();
-  const [isPlaying, setIsPlaying] = React.useState<boolean>(false);
-  const audioRef = React.useRef<HTMLAudioElement | null>(null);
+  const { isPlaying, setIsPlaying } = useGlobalState();
   return (
     <StyledMain>
-      <audio
-        ref={audioRef}
-        src={
-          "https://res.cloudinary.com/dexg5uy3d/video/upload/v1661998204/16_Menu_q1acbq.mp3"
-        }
-        title={"Game sound"}
-        loop
-      ></audio>
       <StyledMainTop>
         <Flex align="center" justify="space-between">
           <Flex width="max-content" align="center" gap="14px">
@@ -57,11 +49,15 @@ const Main: React.FC<MainProps> = ({
             <MainButton
               onClick={() => {
                 if (isPlaying) {
-                  audioRef?.current?.pause();
-                  setIsPlaying(!isPlaying);
+                  (
+                    document.getElementById("game-sound") as HTMLAudioElement
+                  )?.pause();
+                  setIsPlaying && setIsPlaying(!isPlaying);
                 } else {
-                  audioRef?.current?.play();
-                  setIsPlaying(!isPlaying);
+                  (
+                    document.getElementById("game-sound") as HTMLAudioElement
+                  )?.play();
+                  setIsPlaying && setIsPlaying(!isPlaying);
                 }
               }}
             >

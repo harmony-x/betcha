@@ -107,6 +107,8 @@ const RedAndBlack = () => {
                       if (!!range) {
                         setChoice("red");
                         setIsOpenModal(true);
+                      } else {
+                        alert("Choose at least 1 chip to play");
                       }
                     }}
                     icon={<RedBtnBg />}
@@ -123,6 +125,8 @@ const RedAndBlack = () => {
                       if (!!range) {
                         setChoice("black");
                         setIsOpenModal(true);
+                      } else {
+                        alert("Choose at least 1 chip to play");
                       }
                     }}
                     icon={<BlackBtnBg />}

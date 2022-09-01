@@ -32,6 +32,35 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
 	}
+  
+	*::-webkit-scrollbar {
+		width: 10px;
+		height: 4px;
+	}
+	*::-webkit-scrollbar-button {
+		width: 0;
+		height: 0;
+	}
+	*::-webkit-scrollbar-thumb {
+		border-radius: 7px;
+		background: #2E3138;
+	}
+	*::-webkit-scrollbar-thumb:active {
+		background: #191B1F;
+	}
+	*::-webkit-scrollbar-track {
+		background: #FA8B40;
+		border-radius: 7px;
+	}
+	*::-webkit-scrollbar-track:hover {
+		background: #FA8B40;
+	}
+	*::-webkit-scrollbar-track:active {
+		background: #FA8B40;
+	}
+	*::-webkit-scrollbar-corner {
+		background: transparent;
+	}
 	button,
 	input {
 		background-color: transparent;

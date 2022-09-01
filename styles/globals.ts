@@ -17,6 +17,9 @@ const GlobalStyle = createGlobalStyle`
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
   height: 100vh;
+  background-image: url("/Game Background.png");
+  background-position: center;
+  background-size: cover;
 	}
 	*,
 	*::before,

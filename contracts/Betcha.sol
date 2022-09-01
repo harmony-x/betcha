@@ -110,6 +110,8 @@ contract Betcha is VRFConsumerBaseV2, ReentrancyGuard, Ownable {
             bets[requestId].won = true;
             // increase unavailable
             unAvailablePool += bets[requestId].amount;
+        } else {
+            unAvailablePool -= bets[requestId].amount;
         }
         bets[requestId].settled = true;
 

@@ -10,8 +10,10 @@ export const HeadingOne = styled.h1<TypographyProps>`
   text-decoration: ${({ decoration }) => decoration};
   line-height: ${({ lineHeight }) => lineHeight || " 128px"};
   font-weight: ${({ weight }) => (weight ? weight : "400")};
-  -webkit-text-stroke: ${({ theme }) => `1px ${theme.colors.primary2}`};
+  -webkit-text-stroke: ${({ theme, isTextStroke }) =>
+    isTextStroke ? `1px ${theme.colors.primary2}` : ""};
   margin: ${({ margin }) => margin};
+  font-family: "SUPER BOOM", sans-serif;
 `;
 
 export const HeadingFour = styled.h4<TypographyProps>`
@@ -23,7 +25,8 @@ export const HeadingFour = styled.h4<TypographyProps>`
   text-decoration: ${({ decoration }) => decoration};
   line-height: ${({ lineHeight }) => lineHeight || " 46px"};
   font-weight: ${({ weight }) => (weight ? weight : "400")};
-  -webkit-text-stroke: ${({ theme }) => `1px ${theme.colors.primary2}`};
+  -webkit-text-stroke: ${({ theme, isTextStroke }) =>
+    isTextStroke ? `1px ${theme.colors.primary2}` : ""};
   margin: ${({ margin }) => margin};
   font-family: "SUPER BOOM", sans-serif;
 `;
@@ -37,8 +40,9 @@ export const Paragraph = styled.p<TypographyProps>`
   text-decoration: ${({ decoration }) => decoration};
   line-height: ${({ lineHeight }) => lineHeight || " 36px"};
   font-weight: ${({ weight }) => (weight ? weight : "400")};
-  -webkit-text-stroke: ${({ theme }) => `1px ${theme.colors.primary2}`};
-  margin: ${({ margin }) => margin};
+  -webkit-text-stroke: ${({ theme, isTextStroke }) =>
+    isTextStroke ? `1px ${theme.colors.primary2}` : ""};
+  font-family: "SUPER BOOM", sans-serif;
 `;
 
 export const Span = styled.span<TypographyProps>`
@@ -50,6 +54,8 @@ export const Span = styled.span<TypographyProps>`
   font-size: ${({ size }) => (size ? size : "6.4rem")};
   font-weight: ${({ weight }) => (weight ? weight : "400")};
   line-height: ${({ lineHeight }) => (lineHeight ? lineHeight : " 82px")};
-  -webkit-text-stroke: ${({ theme }) => `1px ${theme.colors.primary2}`};
+  -webkit-text-stroke: ${({ theme, isTextStroke }) =>
+    isTextStroke ? `1px ${theme.colors.primary2}` : ""};
   margin: ${({ margin }) => margin};
+  font-family: "SUPER BOOM", sans-serif;
 `;

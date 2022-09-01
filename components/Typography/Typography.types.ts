@@ -11,4 +11,5 @@ export type TypographyProps = {
   decoration?: CSSTypes.Property.TextDecoration;
   padding?: CSSTypes.Property.Padding;
   margin?: CSSTypes.Property.Margin;
+  isTextStroke?: boolean;
 };

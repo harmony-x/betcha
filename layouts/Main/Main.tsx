@@ -1,6 +1,7 @@
 import { Flex } from "$components/Box/Box.styles";
 import { Paragraph } from "$components/Typography/Typography.styles";
 import UserProfile from "$components/UserProfile/UserProfile";
+import HistoryIcon from "$svgs/HistoryIcon";
 import InfoIcon from "$svgs/InfoIcon";
 import MusicIcon from "$svgs/MusicIcon";
 import MusicOffIcon from "$svgs/MusicOffIcon";
@@ -38,7 +39,12 @@ const ConnectWallet = () => {
   return <div style={{cursor: "pointer"}} onClick={onClick}>connect wallet</div>;
 };
 
-const Main: React.FC<MainProps> = ({ children, buttonIcon, onInfoClick }) => {
+const Main: React.FC<MainProps> = ({
+  children,
+  buttonIcon,
+  onInfoClick,
+  onHistoryClick,
+}) => {
   const router = useRouter();
   const [isPlaying, setIsPlaying] = React.useState<boolean>(false);
   const [balance, setBalance] = React.useState<number | string>("-");
@@ -98,6 +104,9 @@ const Main: React.FC<MainProps> = ({ children, buttonIcon, onInfoClick }) => {
               {isPlaying ? <MusicIcon /> : <MusicOffIcon />}
             </MainButton>
           </Flex>
+          <MainButton onClick={onHistoryClick}>
+            <HistoryIcon />
+          </MainButton>
         </Flex>
       </StyledMainBottom>
     </StyledMain>

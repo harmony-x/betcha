@@ -1,6 +1,8 @@
 export const colors = {
   white: "#FFFFFF",
   black: "#191B1F",
+  black2: "#2E3138",
+  black3: "#333333",
   gray1: "#FEF2EA",
   gray2: "#D9D9D9",
   primary: "#FB8F3E",
@@ -8,5 +10,9 @@ export const colors = {
   primary2: "#E56B1E",
   primary3: "#F95C08",
   primary4: "#FC9D39",
+  primary5: "#FFD27B",
+  primary6: "#FDEADD",
+  primary7: "#F1BE59",
   red: "#EA3034",
+  green: "#0A9C3B",
 };

@@ -14,6 +14,7 @@ import ConfirmBtnBg from "$svgs/ConfirmBtnBg";
 import PlayAgainBtnBg from "$svgs/PlayAgainBtnBg";
 import RedBtnBg from "$svgs/RedBtnBg";
 import Trophy from "$svgs/Trophy";
+import { chipToMatic } from "$utils/utils";
 import React from "react";
 import { useTheme } from "styled-components";
 import { RedAndBlackLeftPane, RedAndBlackWrapper } from "./RedAndBlack.styles";
@@ -57,7 +58,7 @@ const RedAndBlack = () => {
             status === "processing" ||
             correctChoice === "" ? (
               <BetHeading
-                text={`BET ${range} BCHA`}
+                text={`BET ${range} CHIP (${chipToMatic(range)})`}
                 width="343px"
                 height="93px"
               />
@@ -170,7 +171,7 @@ const RedAndBlack = () => {
             size="5.4rem"
             lineHeight="60px"
           >
-            PLACE BET OF <br /> {range} bcha for
+            PLACE BET OF <br /> {range} CHIP ({chipToMatic(range)}) for
             <Span
               margin="0 0 0 10px"
               size="5.4rem"

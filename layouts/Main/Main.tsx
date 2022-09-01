@@ -6,8 +6,12 @@ import InfoIcon from "$svgs/InfoIcon";
 import MusicIcon from "$svgs/MusicIcon";
 import MusicOffIcon from "$svgs/MusicOffIcon";
 import { useGlobalState } from "context/context";
+import { truncateAddress } from "$utils/utils";
+import { Web3Provider } from "@ethersproject/providers";
+import { useWeb3React } from "@web3-react/core";
+import { InjectedConnector } from "@web3-react/injected-connector";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   MainButton,
   StyledMain,
@@ -23,7 +27,8 @@ const Main: React.FC<MainProps> = ({
   onHistoryClick,
 }) => {
   const router = useRouter();
-  const { isPlaying, setIsPlaying } = useGlobalState();
+  const [isPlaying, setIsPlaying] = React.useState<boolean>(false);
+  const audioRef = React.useRef<HTMLAudioElement | null>(null);
   return (
     <StyledMain>
       <StyledMainTop>

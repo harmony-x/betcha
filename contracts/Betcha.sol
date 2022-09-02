@@ -69,7 +69,7 @@ contract Betcha is VRFConsumerBaseV2, ReentrancyGuard, Ownable {
         require(betOption == 0 || betOption == 1, "You placed an invalid bet");
 
         // Minimum bet requirement 0.05 MATIC
-        require(msg.value >= 5*10e16);
+        require(msg.value >= 5*1e16, "You must bet at least 0.05 MATIC");
 
         // 0.1% fee
         uint256 stake = msg.value * 999 / 1000;
@@ -134,7 +134,7 @@ contract Betcha is VRFConsumerBaseV2, ReentrancyGuard, Ownable {
 
     // Liquidity Provision
     function addLiquidity() public payable {
-        require(availablePool() != 0, "there has to be MATIC in the pool to add liquidity");
+        require(availablePool() != 0, "There has to be MATIC in the pool to add liquidity");
         require(msg.value != 0, "You have to send MATIC to the pool to add liquidity");
 
         uint256 newTokens = msg.value * coin.totalSupply() / availablePool();
@@ -142,7 +142,7 @@ contract Betcha is VRFConsumerBaseV2, ReentrancyGuard, Ownable {
             coin.mint(owner(), newTokens / 200);
             coin.mint(msg.sender, newTokens * 199 / 200);
         } else {
-            coin.mint(msg.sender, 2000*10e18);
+            coin.mint(msg.sender, 20000*1e18);
         }
     }
 

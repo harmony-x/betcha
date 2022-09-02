@@ -19,35 +19,35 @@ const BetHistoryTable: React.FC = () => {
           id: 0,
           choice: "red",
           orderID: "12357",
-          amount: 10,
+          amount: 0.1,
           won: true,
         },
         {
           id: 1,
           choice: "black",
           orderID: "45728",
-          amount: 5,
+          amount: 0.05,
           won: false,
         },
         {
           id: 2,
           choice: "red",
           orderID: "45723",
-          amount: 7,
+          amount: 0.7,
           won: true,
         },
         {
           id: 3,
           choice: "black",
           orderID: "45723",
-          amount: 5,
+          amount: 0.05,
           won: true,
         },
         {
           id: 4,
           choice: "red",
           orderID: "45727",
-          amount: 10,
+          amount: 0.1,
           won: false,
         },
       ].map(({ id, amount, choice, orderID, won }, index) => (
@@ -85,7 +85,7 @@ const BetHistoryTable: React.FC = () => {
               align="center"
               lineHeight="33px"
             >
-              {amount} BCHA
+              {amount} MATIC
             </Span>
           </StyledBetHistoryTableDataThree>
           <StyledBetHistoryTableDataFour>

@@ -17,12 +17,13 @@ import PlayAgainBtnBg from "$svgs/PlayAgainBtnBg";
 import RedBtnBg from "$svgs/RedBtnBg";
 import Trophy from "$svgs/Trophy";
 import { betchaContract } from "$utils/contracts";
-import { chipToMatic } from "$utils/utils";
+import { chipToMatic, gameStatusIfFulfilled } from "$utils/utils";
 import { Web3Provider } from "@ethersproject/providers";
 import { useWeb3React } from "@web3-react/core";
-import { ethers } from "ethers";
-import React, { useEffect } from "react";
+import { BigNumber, ethers } from "ethers";
+import React from "react";
 import { useTheme } from "styled-components";
+import { Betcha__factory } from "typechain-types";
 import { RedAndBlackLeftPane, RedAndBlackWrapper } from "./RedAndBlack.styles";
 import { Choice, Game } from "./RedAndBlack.types";
 
@@ -36,20 +37,12 @@ const RedAndBlack = () => {
   const [game, setGame] = React.useState<Game>({
     status: "init",
     correctChoice: "",
+    requestId: BigNumber.from(0),
     amount: range * 2,
   });
 
   const { status, correctChoice, amount } = game;
   const { library, account } = useWeb3React<Web3Provider>();
-
-  useEffect(() => {
-    betchaContract(library).on(
-      betchaContract(library).filters.BetPlaced(),
-      (ss) => {
-        console.log("ss", ss);
-      }
-    );
-  }, []);
 
   return (
     <RedAndBlackWrapper>
@@ -160,6 +153,7 @@ const RedAndBlack = () => {
                     onClick={() => {
                       setGame({
                         status: "init",
+                        requestId: BigNumber.from(0),
                         correctChoice: "",
                         amount: range * 2,
                       });
@@ -177,8 +171,15 @@ const RedAndBlack = () => {
                   />
                   <Button
                     disabled={disableClaim}
-                    onClick={() => {
-                      setDisableClaim(true);
+                    onClick={async () => {
+                      try {
+                        await betchaContract(library).withdrawProceeds(
+                          game.requestId
+                        );
+                        setDisableClaim(true);
+                      } catch (error) {
+                        setDisableClaim(false);
+                      }
                     }}
                     icon={disableClaim ? <ClaimedBtnBg /> : <ClaimBtnBg />}
                     text={
@@ -239,27 +240,61 @@ const RedAndBlack = () => {
             />
             <Button
               onClick={async () => {
-                setGame({
-                  ...game,
-                  status: "processing",
-                });
-                  await betchaContract(library).placeBet(choiceOption[choice], {
-                    value: ethers.utils.parseEther("" + range * 0.05 * 1.001),
-                    gasLimit: 22000,
-                  })
-                setGame({
-                  status: "complete",
-                  amount: range * 2,
-                  correctChoice: parseInt((Math.random() * 2).toString())
-                    ? "black"
-                    : "red",
-                });
+                try {
+                  // Calls bet function in smart contract - there should be a state change here, so that:
+                  // function can't be called again, cancel doesn't work, and modal doesn't close
+                  // all this can be nullified in the catch in the case of an error
+                  const transaction = await betchaContract(library).placeBet(
+                    choiceOption[choice],
+                    {
+                      value: ethers.utils.parseEther("" + range * 0.05 * 1.001),
+                    }
+                  );
+                  setGame({
+                    ...game,
+                    status: "processing",
+                  });
+                  // It may take some time, so it's a good idea to alert users that we're 
+                  // waiting for transaction confirmation
+                  const transactionReceipt = await transaction.wait(3);
+
+                  const log = transactionReceipt.logs[2];
+
+                  const result = new ethers.utils.Interface(
+                    Betcha__factory.abi
+                  ).decodeEventLog(
+                    "BetPlaced(address,uint256,uint256,uint256)",
+                    log.data,
+                    log.topics
+                  );
+                  const requestId = result["requestId"] as BigNumber;
+
+                  // polling the contract to check that the randomness has been determined
+                  const won = await gameStatusIfFulfilled(requestId, library);
+
+                  // a way to update bet history
+                  
+                  const getOtherChoice = (playerChoice: Choice) =>
+                    playerChoice === "red" ? "black" : "red";
+
+                  setGame({
+                    status: "complete",
+                    amount: range * 2,
+                    requestId: requestId,
+                    correctChoice: won ? choice : getOtherChoice(choice),
+                  });
+                } catch (error) {
+                  alert(
+                    "There was an error placing the bet, please check the console."
+                  );
+                  console.log("Bet Error", error);
+                }
                 setIsOpenModal(false);
               }}
               icon={<ConfirmBtnBg />}
               text={
                 <Span size="2.4rem" lineHeight="31px">
-                  CONFIRM
+                  {game.status === "processing" ? "PROCESSING" : "CONFIRM"}
                 </Span>
               }
               height="66px"

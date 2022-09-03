@@ -15,41 +15,41 @@ const BetHistoryTable: React.FC = () => {
   return (
     <>
       {[
-        {
-          id: 0,
-          choice: "red",
-          orderID: "12357",
-          amount: 0.1,
-          won: true,
-        },
-        {
-          id: 1,
-          choice: "black",
-          orderID: "45728",
-          amount: 0.05,
-          won: false,
-        },
-        {
-          id: 2,
-          choice: "red",
-          orderID: "45723",
-          amount: 0.7,
-          won: true,
-        },
-        {
-          id: 3,
-          choice: "black",
-          orderID: "45723",
-          amount: 0.05,
-          won: true,
-        },
-        {
-          id: 4,
-          choice: "red",
-          orderID: "45727",
-          amount: 0.1,
-          won: false,
-        },
+        // {
+        //   id: 0,
+        //   choice: "red",
+        //   orderID: "12357",
+        //   amount: 0.1,
+        //   won: true,
+        // },
+        // {
+        //   id: 1,
+        //   choice: "black",
+        //   orderID: "45728",
+        //   amount: 0.05,
+        //   won: false,
+        // },
+        // {
+        //   id: 2,
+        //   choice: "red",
+        //   orderID: "45723",
+        //   amount: 0.7,
+        //   won: true,
+        // },
+        // {
+        //   id: 3,
+        //   choice: "black",
+        //   orderID: "45723",
+        //   amount: 0.05,
+        //   won: true,
+        // },
+        // {
+        //   id: 4,
+        //   choice: "red",
+        //   orderID: "45727",
+        //   amount: 0.1,
+        //   won: false,
+        // },
       ].map(({ id, amount, choice, orderID, won }, index) => (
         <StyledBetHistoryTableRow
           backgroundColor={
